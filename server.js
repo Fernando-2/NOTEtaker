@@ -31,7 +31,7 @@ app.post("/api/notes", function (req, res) {
   fs.writeFileSync("./db/db.json", JSON.stringify(newNotes));
   res.json(newNotes);
 });
-app.delete("/api/notes/:id", (req, res) => {
+app.delete("/api/notes", (req, res) => {
     
     const deleteNote = req.body;
     // read current file
