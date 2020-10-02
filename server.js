@@ -25,7 +25,7 @@ app.post("/api/notes", function (req, res) {
     // parses the raw data 
     const notes = JSON.parse(dbNotes);
     //makes a new note id for every note made
-    newNote.id = notes.length 
+    newNote.id = notes.length+1 
     console.log(newNote.id);
     // creates array that uses (...) to hold old array data and makes new array.
     const newNotes = [...notes, newNote];//notes.concat(newNote) is what this is doing
@@ -46,9 +46,10 @@ app.delete("/api/notes/:id", (req, res) => {
     console.log(newNotes);
     for (var i = 0; i < chosen; i++) {
         // create new array that holds data minus deleted index
-        if (chosen) {
-            chosen.splice(i, 1);
+        if (newNotes[i].id == id) {
+            chosen.readFileSync("./db/db.json");
         }
+        fs.writeFileSync("./db/db.json", JSON.stringify(newNotes));
         console.log(newNotes);
     }
     // writes updated data to file eventually
